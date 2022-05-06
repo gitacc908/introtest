@@ -1,4 +1,4 @@
-# introtest\
+
 Setup
 Create a folder and put all the files inside it.
 Create a virtual environtment - virtualenv env
