@@ -1,4 +1,3 @@
-from django.forms import FloatField
 from .serializers import WorkerSerializer, VisitSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
