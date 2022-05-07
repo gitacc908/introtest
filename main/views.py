@@ -35,10 +35,10 @@ class WorkerVisitView(APIView):
         longitude = request.data.get('longitude')
         if not pk or not latitude or not longitude:
             return Response('Provide all three fields, (pk,latitude,longitude)!')
-        if int(pk) not in list(worker.stores.all().values_list('id', flat=True)):
-            return Response('The worker does not belong to the outlet!')
-
         store = get_object_or_404(Store, id=pk)
-        visit = Visit.objects.create(store=store, latitude=latitude, longitude=longitude)
-        serializer = self.serializer(visit)
-        return Response(serializer.data)
+        if store.worker == worker:
+            visit = Visit.objects.create(store=store, latitude=latitude, longitude=longitude)
+            serializer = self.serializer(visit)
+            return Response(serializer.data)
+        else:
+            return Response('store worker != worker')
